@@ -1,0 +1,6 @@
+
+c	java:S116"NRename this field "LOG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ¨”Ú
+j
+java:S1845"ORename method "audit" to prevent any misunderstanding/clash with field "AUDIT".(Ğ›•şÿÿÿÿ
+Q
+java:S1117"6Rename "id" which hides the field declared at line 14.(õµüüÿÿÿÿ

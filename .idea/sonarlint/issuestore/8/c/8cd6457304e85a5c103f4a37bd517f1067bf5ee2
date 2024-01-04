@@ -1,0 +1,8 @@
+
+`	java:S112M"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+M
+java:S3655I"7Call "Optional#isPresent()" before accessing the value.(‰¤®Ø
+=
+java:S1068"'Remove this unused "LOG" private field.(ŸÝ«ß
+E
+java:S1068"/Remove this unused "auditLogger" private field.(‡ºùÚ
