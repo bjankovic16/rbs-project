@@ -1,9 +1,15 @@
 
-b
-java:S1192$"GDefine a constant instead of duplicating this literal "person" 4 times.(¯”¿ÿüÿÿÿÿ
-€
-java:S6833"eReplace the "@Controller" annotation by "@RestController" and remove all "@ResponseBody" annotations.(íœ¡ñùÿÿÿÿ
-B
-java:S1068"'Remove this unused "LOG" private field.(çµ ãúÿÿÿÿ
-J
-java:S1068"/Remove this unused "auditLogger" private field.(óªÈøÿÿÿÿ
+m
+java:S1192'"KDefine a constant instead of duplicating this literal "CSRF_TOKEN" 3 times.(¯…úÿÿÿÿ8…ì•óÍ1
+i
+java:S1192("GDefine a constant instead of duplicating this literal "person" 4 times.(¯”¿ÿüÿÿÿÿ8†ì•óÍ1
+C
+java:S1170"!Make this final field static too.(–¿­Ìÿÿÿÿÿ8–²—óÍ1
+‡
+java:S6833"eReplace the "@Controller" annotation by "@RestController" and remove all "@ResponseBody" annotations.(íœ¡ñùÿÿÿÿ8¢ì•óÍ1
+I
+java:S1068"'Remove this unused "LOG" private field.(çµ ãúÿÿÿÿ8¶ì•óÍ1
+Q
+java:S1068"/Remove this unused "auditLogger" private field.(óªÈøÿÿÿÿ8·ì•óÍ1
+O
+java:S1068"-Remove this unused "csrfToken" private field.(–¿­Ìÿÿÿÿÿ8¡É›óÍ1
