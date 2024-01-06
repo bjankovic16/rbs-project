@@ -1,6 +1,7 @@
 package com.zuehlke.securesoftwaredevelopment.controller;
 
 import com.zuehlke.securesoftwaredevelopment.config.AuditLogger;
+import com.zuehlke.securesoftwaredevelopment.config.SecurityUtil;
 import com.zuehlke.securesoftwaredevelopment.domain.Person;
 import com.zuehlke.securesoftwaredevelopment.domain.User;
 import com.zuehlke.securesoftwaredevelopment.repository.PersonRepository;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,6 @@ public class PersonsController {
 
     private final PersonRepository personRepository;
     private final UserRepository userRepository;
-    private final String csrfToken = "csrfToken";
 
     public PersonsController(PersonRepository personRepository, UserRepository userRepository) {
         this.personRepository = personRepository;
@@ -35,24 +36,30 @@ public class PersonsController {
     }
 
     @GetMapping("/persons/{id}")
+    @PreAuthorize("hasAuthority('VIEW_PERSON')")
     public String person(@PathVariable int id, Model model, HttpSession session) {
+        String csrf = session.getAttribute("CSRF_TOKEN").toString();
         model.addAttribute("CSRF_TOKEN", session.getAttribute("CSRF_TOKEN"));
         model.addAttribute("person", personRepository.get("" + id));
         return "person";
     }
 
     @GetMapping("/myprofile")
-    public String self(Model model, Authentication authentication) {
+    @PreAuthorize("hasAuthority('VIEW_MY_PROFILE')")
+    public String self(Model model, Authentication authentication, HttpSession session) {
         User user = (User) authentication.getPrincipal();
+        String csrf = session.getAttribute("CSRF_TOKEN").toString();
+        model.addAttribute("CSRF_TOKEN", session.getAttribute("CSRF_TOKEN"));
         model.addAttribute("person", personRepository.get("" + user.getId()));
         return "person";
     }
 
     @DeleteMapping("/persons/{id}")
     public ResponseEntity<Void> person(@PathVariable int id) {
-        personRepository.delete(id);
-        userRepository.delete(id);
-
+        if (SecurityUtil.hasPermission("UPDATE_PERSON")) {
+            personRepository.delete(id);
+            userRepository.delete(id);
+        }
         return ResponseEntity.noContent().build();
     }
 
@@ -60,21 +67,33 @@ public class PersonsController {
     public String updatePerson(Person person, HttpSession session,
                                @RequestParam("csrfToken") String csrfToken) throws AccessDeniedException {
         String csrf = session.getAttribute("CSRF_TOKEN").toString();
-        if(!csrf.equals(csrfToken)){
+        User loggedUser = SecurityUtil.getCurrentUser();
+        if (!csrf.equals(csrfToken)) {
+            LOG.error("User (id = " + loggedUser.getId() + ") has invalid csrf token! Access is denied!");
             throw new AccessDeniedException("Forbidden");
         }
-
-        personRepository.update(person);
-        return "redirect:/persons/" + person.getId();
+        if (SecurityUtil.hasPermission("UPDATE_PERSON")) {
+            personRepository.update(person);
+            return "redirect:/persons/" + person.getId();
+        } else if (person.getId().equals(String.valueOf(loggedUser.getId()))) {
+            personRepository.update(person);
+            return "redirect:/myprofile";
+        } else {
+            LOG.error("User (id = " + loggedUser.getId() + ") doesn't have valid permission! Access is denied!");
+            throw new AccessDeniedException("Forbidden");
+        }
     }
 
+
     @GetMapping("/persons")
+    @PreAuthorize("hasAuthority('VIEW_PERSONS_LIST')")
     public String persons(Model model) {
         model.addAttribute("persons", personRepository.getAll());
         return "persons";
     }
 
     @GetMapping(value = "/persons/search", produces = "application/json")
+    @PreAuthorize("hasAuthority('VIEW_PERSONS_LIST')")
     @ResponseBody
     public List<Person> searchPersons(@RequestParam String searchTerm) throws SQLException {
         return personRepository.search(searchTerm);

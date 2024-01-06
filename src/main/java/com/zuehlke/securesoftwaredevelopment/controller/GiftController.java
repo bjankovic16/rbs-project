@@ -5,6 +5,7 @@ import com.zuehlke.securesoftwaredevelopment.domain.*;
 import com.zuehlke.securesoftwaredevelopment.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,17 +45,20 @@ public class GiftController {
     }
 
     @GetMapping("/create-form")
+    @PreAuthorize("hasAuthority('CREATE_GIFT')")
     public String CreateForm(Model model) {
         model.addAttribute("tags", tagRepository.getAll());
         return "create-form";
     }
 
+    @PreAuthorize("hasAuthority('VIEW_GIFTS_LIST')")
     @GetMapping(value = "/api/gifts/search", produces = "application/json")
     @ResponseBody
     public List<Gift> search(@RequestParam("query") String query) throws SQLException {
         return giftRepository.search(query);
     }
 
+    @PreAuthorize("hasAuthority('VIEW_GIFTS_LIST')")
     @GetMapping("/gifts")
     public String showGift(@RequestParam(name = "id", required = false) String id, Model model, Authentication authentication) {
         if (id == null) {
@@ -89,7 +93,7 @@ public class GiftController {
 
         return "gift";
     }
-
+    @PreAuthorize("hasAuthority('CREATE_GIFT')")
     @PostMapping("/gifts")
     public String createGift(NewGift newGift) throws SQLException {
         List<Tag> tagList = this.tagRepository.getAll();
@@ -98,6 +102,7 @@ public class GiftController {
         return "redirect:/gifts?id=" + id;
     }
 
+    @PreAuthorize("hasAuthority('BUY_GIFT')")
     @GetMapping("/buy-gift/{id}")
     public String showBuyCar(
             @PathVariable("id") int id,
@@ -115,7 +120,7 @@ public class GiftController {
 
         return "buy-gift";
     }
-
+    @PreAuthorize("hasAuthority('BUY_GIFT')")
     @PostMapping("/buy-gift/{id}")
     public String buyCar(@PathVariable("id") int id, @RequestParam(name = "count", required = true) int count, Address address, Model model) {
         if (address.getAddress().length() < 10) {

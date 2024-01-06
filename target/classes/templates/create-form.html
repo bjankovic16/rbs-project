@@ -9,7 +9,7 @@
     <title>Create form</title>
 </head>
 <body>
-<div layout:fragment="content">
+<div sec:authorize="hasAuthority('CREATE_GIFT')" layout:fragment="content">
     <h1>Add gift</h1>
     <div class="row">
         <form class="col-5" method="POST" th:action="@{/gifts}">

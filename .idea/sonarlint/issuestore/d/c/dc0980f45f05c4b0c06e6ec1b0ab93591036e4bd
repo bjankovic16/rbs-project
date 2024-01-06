@@ -7,4 +7,4 @@ _
 java:S1128
 "DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ
 B
-java:S1068"'Remove this unused "LOG" private field.(ÃñÁ¥ÿÿÿÿÿ
+java:S1068"'Remove this unused "LOG" private field.(ÃñÁ¥ÿÿÿÿÿ

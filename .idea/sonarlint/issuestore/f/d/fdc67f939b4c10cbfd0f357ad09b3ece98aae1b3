@@ -1,20 +1,20 @@
 
 a
-java:S1192*"FDefine a constant instead of duplicating this literal "gifts" 4 times.(í±¼ÿùÿÿÿÿ
+java:S1192+"FDefine a constant instead of duplicating this literal "gifts" 4 times.(í±¼ÿùÿÿÿÿ
 €
-java:S6833"eReplace the "@Controller" annotation by "@RestController" and remove all "@ResponseBody" annotations.(íœ¡ñùÿÿÿÿ
-c	java:S100/"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™°Üü
+java:S6833"eReplace the "@Controller" annotation by "@RestController" and remove all "@ResponseBody" annotations.(íœ¡ñùÿÿÿÿ
+c	java:S1001"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™°Üü
 Y
-java:S1155K">Use isEmpty() to check whether the collection is empty or not.(Éè“ñıÿÿÿÿ
+java:S1155O">Use isEmpty() to check whether the collection is empty or not.(Éè“ñıÿÿÿÿ
 T
-java:S1612L">Replace this lambda with method reference 'Rating::getRating'.(ª™£˜
+java:S1612P">Replace this lambda with method reference 'Rating::getRating'.(ª™£˜
 ƒ
-java:S1130^"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(Ëıà>
+java:S1130b"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(Ëıà>
 M
-java:S6814h"2Convert this optional parameter to an Object type.(¥¨œÿÿÿÿÿ
+java:S6814m"2Convert this optional parameter to an Object type.(¥¨œÿÿÿÿÿ
 H
-java:S6814i"2Convert this optional parameter to an Object type.(¸ÅŞ‡
+java:S6814n"2Convert this optional parameter to an Object type.(¸ÅŞ‡
 =
-java:S1068"'Remove this unused "LOG" private field.(âû‹¹
+java:S1068"'Remove this unused "LOG" private field.(âû‹¹
 J
-java:S1068"/Remove this unused "auditLogger" private field.(“ò¶¦ÿÿÿÿÿ
+java:S1068"/Remove this unused "auditLogger" private field.(“ò¶¦ÿÿÿÿÿ
