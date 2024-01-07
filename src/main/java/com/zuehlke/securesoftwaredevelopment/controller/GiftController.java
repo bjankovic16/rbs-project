@@ -51,14 +51,14 @@ public class GiftController {
         return "create-form";
     }
 
-    @PreAuthorize("hasAuthority('VIEW_GIFTS_LIST')")
+    @PreAuthorize("hasAuthority('VIEW_GIFT_LIST')")
     @GetMapping(value = "/api/gifts/search", produces = "application/json")
     @ResponseBody
     public List<Gift> search(@RequestParam("query") String query) throws SQLException {
         return giftRepository.search(query);
     }
 
-    @PreAuthorize("hasAuthority('VIEW_GIFTS_LIST')")
+    @PreAuthorize("hasAuthority('VIEW_GIFT_LIST')")
     @GetMapping("/gifts")
     public String showGift(@RequestParam(name = "id", required = false) String id, Model model, Authentication authentication) {
         if (id == null) {

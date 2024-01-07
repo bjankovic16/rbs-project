@@ -36,13 +36,14 @@ public class GiftRepository {
                 Gift gift = createGiftFromResultSet(rs);
                 giftList.add(gift);
             }
+            LOG.info("Getting all movies operation succeeded!");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Getting all movies operation failed!", e);
         }
         return giftList;
     }
 
-    public List<Gift> search(String searchTerm) throws SQLException {
+    public List<Gift> search(String searchTerm){
         List<Gift> giftList = new ArrayList<>();
         String query = "SELECT DISTINCT g.id, g.name, g.description, g.price FROM gift g, gift_to_tag gt, tags t" +
                 " WHERE g.id = gt.giftId" +
@@ -55,6 +56,9 @@ public class GiftRepository {
             while (rs.next()) {
                 giftList.add(createGiftFromResultSet(rs));
             }
+            LOG.info("Searching gift for term "+searchTerm+ " succeeded!");
+        } catch (SQLException e){
+            LOG.warn("Searching gifts operation failed!", e);
         }
         return giftList;
     }
@@ -74,6 +78,7 @@ public class GiftRepository {
                         try {
                             return g.getId() == rs2.getInt(2);
                         } catch (SQLException e) {
+                            LOG.warn("Getting tags from gift operation failed!", e);
                             throw new RuntimeException(e);
                         }
                     }).findFirst().get();
@@ -83,7 +88,7 @@ public class GiftRepository {
                 return gift;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Getting gift operation failed!", e);
         }
 
         return null;
@@ -111,12 +116,13 @@ public class GiftRepository {
                         statement2.setInt(2, tag.getId());
                         statement2.executeUpdate();
                     } catch (SQLException e) {
-                        e.printStackTrace();
+                        LOG.warn("Creating tag operation failed!", e);
                     }
                 });
             }
+            LOG.info("Gift created");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Creating gift operation failed!", e);
         }
         return id;
     }
@@ -134,7 +140,7 @@ public class GiftRepository {
             statement.executeUpdate(query3);
             statement.executeUpdate(query4);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Deleting gift operation failed!", e);
         }
     }
 

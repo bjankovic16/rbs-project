@@ -1,6 +1,7 @@
 package com.zuehlke.securesoftwaredevelopment.controller;
 
 import com.zuehlke.securesoftwaredevelopment.config.AuditLogger;
+import com.zuehlke.securesoftwaredevelopment.config.Entity;
 import com.zuehlke.securesoftwaredevelopment.config.SecurityUtil;
 import com.zuehlke.securesoftwaredevelopment.domain.Person;
 import com.zuehlke.securesoftwaredevelopment.domain.User;
@@ -38,7 +39,6 @@ public class PersonsController {
     @GetMapping("/persons/{id}")
     @PreAuthorize("hasAuthority('VIEW_PERSON')")
     public String person(@PathVariable int id, Model model, HttpSession session) {
-        String csrf = session.getAttribute("CSRF_TOKEN").toString();
         model.addAttribute("CSRF_TOKEN", session.getAttribute("CSRF_TOKEN"));
         model.addAttribute("person", personRepository.get("" + id));
         return "person";
@@ -48,7 +48,6 @@ public class PersonsController {
     @PreAuthorize("hasAuthority('VIEW_MY_PROFILE')")
     public String self(Model model, Authentication authentication, HttpSession session) {
         User user = (User) authentication.getPrincipal();
-        String csrf = session.getAttribute("CSRF_TOKEN").toString();
         model.addAttribute("CSRF_TOKEN", session.getAttribute("CSRF_TOKEN"));
         model.addAttribute("person", personRepository.get("" + user.getId()));
         return "person";
@@ -69,17 +68,18 @@ public class PersonsController {
         String csrf = session.getAttribute("CSRF_TOKEN").toString();
         User loggedUser = SecurityUtil.getCurrentUser();
         if (!csrf.equals(csrfToken)) {
-            LOG.error("User (id = " + loggedUser.getId() + ") has invalid csrf token! Access is denied!");
+            LOG.error("User (id = " + loggedUser.getId() + ") has invalid csrf token!");
             throw new AccessDeniedException("Forbidden");
         }
         if (SecurityUtil.hasPermission("UPDATE_PERSON")) {
             personRepository.update(person);
             return "redirect:/persons/" + person.getId();
         } else if (person.getId().equals(String.valueOf(loggedUser.getId()))) {
+            auditLogger.audit("changing of user information");
             personRepository.update(person);
             return "redirect:/myprofile";
         } else {
-            LOG.error("User (id = " + loggedUser.getId() + ") doesn't have valid permission! Access is denied!");
+            LOG.error("User (id = " + loggedUser.getId() + ") doesn't have permission!");
             throw new AccessDeniedException("Forbidden");
         }
     }

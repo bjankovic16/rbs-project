@@ -34,7 +34,7 @@ public class UserRepository {
                 return new User(id, username1, password);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Finding user failed!", e);
         }
         return null;
     }
@@ -46,7 +46,7 @@ public class UserRepository {
              ResultSet rs = statement.executeQuery(query)) {
             return rs.next();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("User doesn't have valid credentials!", e);
         }
         return false;
     }
@@ -58,7 +58,7 @@ public class UserRepository {
         ) {
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Deleting failed!", e);
         }
     }
 }

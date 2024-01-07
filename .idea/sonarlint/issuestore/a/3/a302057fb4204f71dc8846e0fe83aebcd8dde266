@@ -1,21 +1,15 @@
 
 m
-java:S1192)"KDefine a constant instead of duplicating this literal "CSRF_TOKEN" 7 times.(†­ßªşÿÿÿÿ8İ´ßûÍ1
+java:S1192*"KDefine a constant instead of duplicating this literal "CSRF_TOKEN" 5 times.(¯…úÿÿÿÿ8ÍĞ­§Î1
 i
-java:S1192+"GDefine a constant instead of duplicating this literal "person" 4 times.(¯”¿ÿüÿÿÿÿ8Ş´ßûÍ1
+java:S1192+"GDefine a constant instead of duplicating this literal "person" 4 times.(¯”¿ÿüÿÿÿÿ8Û‘«§Î1
 ‡
-java:S6833"eReplace the "@Controller" annotation by "@RestController" and remove all "@ResponseBody" annotations.(íœ¡ñùÿÿÿÿ8™´ÖûÍ1
-Z
-java:S1854)"8Remove this useless assignment to local variable "csrf".(†­ßªşÿÿÿÿ8ÎÜûÍ1
-K
-java:S1481)")Remove this unused "csrf" local variable.(†­ßªşÿÿÿÿ8’ÎÜûÍ1
-Z
-java:S18543"8Remove this useless assignment to local variable "csrf".(†­ßªşÿÿÿÿ8•µßûÍ1
-K
-java:S14813")Remove this unused "csrf" local variable.(†­ßªşÿÿÿÿ8–µßûÍ1
+java:S6833"eReplace the "@Controller" annotation by "@RestController" and remove all "@ResponseBody" annotations.(íœ¡ñùÿÿÿÿ8ó‘«§Î1
 c
-java:S3457H"AFormat specifiers should be used instead of string concatenation.(Õ¨¯˜ÿÿÿÿÿ8§´ÖûÍ1
+java:S3457G"AFormat specifiers should be used instead of string concatenation.(¹‰¢ışÿÿÿÿ8‹’«§Î1
 ^
-java:S3457R"AFormat specifiers should be used instead of string concatenation.(Õ†­å8©´ÖûÍ1
-Q
-java:S1068"/Remove this unused "auditLogger" private field.(óªÈøÿÿÿÿ8¬´ÖûÍ1
+java:S3457R"AFormat specifiers should be used instead of string concatenation.(êôÀ¼8’«§Î1
+
+java:S1130b"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(»Úšéùÿÿÿÿ8â·¹¨Î1
+r
+java:S1128"PRemove this unused import 'com.zuehlke.securesoftwaredevelopment.config.Entity'.(ôûñÄøÿÿÿÿ8¿À«§Î1

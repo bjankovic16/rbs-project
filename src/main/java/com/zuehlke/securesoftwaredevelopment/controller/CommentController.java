@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class CommentController {
-    private static final Logger LOG = LoggerFactory.getLogger(CommentController.class);
 
     private CommentRepository commentRepository;
 

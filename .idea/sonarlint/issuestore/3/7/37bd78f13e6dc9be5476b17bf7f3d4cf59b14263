@@ -1,3 +1,5 @@
 
-=
-java:S1068"'Remove this unused "LOG" private field.(їђ•Ё
+I
+java:S1128"-Remove this unused import 'org.slf4j.Logger'.(нШ®68ЦСљ§О1
+Q
+java:S1128"4Remove this unused import 'org.slf4j.LoggerFactory'.(–яЪЮ8ШСљ§О1

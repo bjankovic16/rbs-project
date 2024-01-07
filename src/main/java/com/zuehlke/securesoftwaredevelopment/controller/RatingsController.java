@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class RatingsController {
-    private static final Logger LOG = LoggerFactory.getLogger(RatingsController.class);
-
     private RatingRepository ratingRepository;
 
     public RatingsController(RatingRepository ratingRepository) {

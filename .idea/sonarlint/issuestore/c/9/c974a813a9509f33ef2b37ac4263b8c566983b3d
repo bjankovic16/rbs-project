@@ -1,9 +1,7 @@
 
 j
-java:S2095*"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ά±·»ωÿÿÿÿ
-j
 java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(«£“Ζωÿÿÿÿ
+j
+java:S2095*"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ά±·»ωÿÿÿÿ
 g
 java:S1128"QRemove this unused import 'com.zuehlke.securesoftwaredevelopment.domain.Comment'.(ύεζ
-=
-java:S1068"'Remove this unused "LOG" private field.(εθ›Χ

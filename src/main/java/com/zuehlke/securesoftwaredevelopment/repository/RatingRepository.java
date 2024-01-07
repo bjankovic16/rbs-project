@@ -46,7 +46,7 @@ public class RatingRepository {
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Creating or updating ratings operation failed!", e);
         }
     }
 
@@ -60,7 +60,7 @@ public class RatingRepository {
                 ratingList.add(new Rating(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Getting ratings operation failed!", e);
         }
         return ratingList;
     }

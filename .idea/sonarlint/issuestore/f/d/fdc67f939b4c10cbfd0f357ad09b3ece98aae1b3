@@ -4,12 +4,14 @@ java:S1192+"FDefine a constant instead of duplicating this literal "gifts" 4 ti
 €
 java:S6833"eReplace the "@Controller" annotation by "@RestController" and remove all "@ResponseBody" annotations.(íœ¡ñùÿÿÿÿ
 c	java:S1001"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™°Üü
+„
+java:S11309"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(æ¼¼õ
 Y
 java:S1155O">Use isEmpty() to check whether the collection is empty or not.(Éè“ñıÿÿÿÿ
 T
 java:S1612P">Replace this lambda with method reference 'Rating::getRating'.(ª™£˜
-ƒ
-java:S1130b"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(Ëıà>
+Š
+java:S1130b"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(Ëıà>8­œ²¨Î1
 M
 java:S6814m"2Convert this optional parameter to an Object type.(¥¨œÿÿÿÿÿ
 H

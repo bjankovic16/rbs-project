@@ -33,13 +33,14 @@ public class PersonRepository {
             while (rs.next()) {
                 personList.add(createPersonFromResultSet(rs));
             }
+            LOG.info("Getting all persons succeeded!");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Get all persons operation failed!", e);
         }
         return personList;
     }
 
-    public List<Person> search(String searchTerm) throws SQLException {
+    public List<Person> search(String searchTerm){
         List<Person> personList = new ArrayList<>();
         String query = "SELECT id, firstName, lastName, email FROM persons WHERE UPPER(firstName) like UPPER('%" + searchTerm + "%')" +
                 " OR UPPER(lastName) like UPPER('%" + searchTerm + "%')";
@@ -49,7 +50,11 @@ public class PersonRepository {
             while (rs.next()) {
                 personList.add(createPersonFromResultSet(rs));
             }
+            LOG.info("Searching persons for term "+searchTerm+ " succeeded!");
+        } catch (SQLException e){
+            LOG.warn("Searching persons operation failed!", e);
         }
+
         return personList;
     }
 
@@ -62,7 +67,7 @@ public class PersonRepository {
                 return createPersonFromResultSet(rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Getting person operation failed!", e);
         }
 
         return null;
@@ -75,7 +80,7 @@ public class PersonRepository {
         ) {
             statement.executeUpdate(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Deleting person operation failed!", e);
         }
     }
 
@@ -94,13 +99,14 @@ public class PersonRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
         ) {
+            auditLogger.auditChange(new Entity("person update->firstName", personUpdate.getId(), personFromDb.getFirstName(), personUpdate.getFirstName()));
             String firstName = personUpdate.getFirstName() != null ? personUpdate.getFirstName() : personFromDb.getFirstName();
             String email = personUpdate.getEmail() != null ? personUpdate.getEmail() : personFromDb.getEmail();
             statement.setString(1, firstName);
             statement.setString(2, email);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.warn("Updating person operation failed!", e);
         }
     }
 }
